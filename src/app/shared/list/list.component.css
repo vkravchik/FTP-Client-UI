@@ -1,0 +1,7 @@
+.pointer-text {
+  cursor: pointer;
+}
+
+mat-list-item:hover {
+  background: #f5f5f5f5;
+}

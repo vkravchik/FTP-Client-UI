@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {FtpService} from './ftp.service';
 
 @Component({
   selector: 'app-root',

@@ -1,0 +1,12 @@
+.example-icon {
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+.pointer-block {
+  cursor: pointer;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}

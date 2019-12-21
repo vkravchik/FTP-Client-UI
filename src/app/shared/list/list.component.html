@@ -1,0 +1,26 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<mat-list>
+  <h3 mat-subheader>Folders</h3>
+  <mat-list-item *ngFor="let dir of dirs" (click)="openFolder(dir.name)" (contextmenu)="onContextMenu($event, dir)">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <h4 class="pointer-text" mat-line>{{dir.name}}</h4>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mat-subheader>Notes</h3>
+  <mat-list-item *ngFor="let file of files" (contextmenu)="onContextMenu($event, file)">
+    <mat-icon mat-list-icon>note</mat-icon>
+    <h4 class="pointer-text" mat-line (click)="downloadFile(file.name)">{{file.name}}</h4>
+  </mat-list-item>
+</mat-list>
+
+<div style="visibility: hidden; position: fixed"
+     [style.left]="contextMenuPosition.x"
+     [style.top]="contextMenuPosition.y"
+     [matMenuTriggerFor]="contextMenu">
+</div>
+<mat-menu #contextMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="onContextMenuAction1(item)">Action 1</button>
+    <button mat-menu-item (click)="onContextMenuAction2(item)">Action 2</button>
+  </ng-template>
+</mat-menu>

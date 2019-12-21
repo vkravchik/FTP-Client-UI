@@ -1,0 +1,29 @@
+<div>
+  <mat-card>
+    <mat-card-title>
+      Login
+    </mat-card-title>
+    <div class="example-container" [formGroup]="connectingForm">
+      <mat-form-field>
+        <input matInput placeholder="Enter Host address" formControlName="host">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Enter your username" formControlName="username">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="isSFTP">Use SFTP?</mat-checkbox>
+
+      <mat-card-footer>
+        <button mat-raised-button color="primary" class="login-button" (click)="connect()">Connect</button>
+      </mat-card-footer>
+    </div>
+  </mat-card>
+</div>
