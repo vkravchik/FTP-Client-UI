@@ -48,6 +48,11 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
       this.router.navigate(['']);
       this.hideSpinner();
+    }, error => {
+      this.ftp.connect(this.connectingForm.value);
+      this.router.navigate(['']);
+      this.hideSpinner();
+
     });
   }
 
