@@ -1,6 +1,10 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>{{host}}</span>
+    <mat-icon *ngIf="isSFTP"
+              class="example-icon"
+              aria-hidden="false"
+              aria-label="Example user verified icon">verified_user</mat-icon>
     <span class="example-spacer"></span>
     <span>{{username}}</span>
     <mat-icon class="example-icon "

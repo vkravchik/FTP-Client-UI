@@ -11,6 +11,7 @@ export class MenuComponent implements OnInit {
 
   host: string;
   username: string;
+  isSFTP: boolean;
 
   constructor(private router: Router,
               private storeService: StoreService) { }
@@ -18,6 +19,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.host = this.storeService.getConnectObject().host;
     this.username = this.storeService.getConnectObject().username;
+    this.isSFTP = this.storeService.getConnectObject().isSFTP;
   }
 
   exit() {

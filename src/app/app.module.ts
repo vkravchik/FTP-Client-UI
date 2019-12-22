@@ -22,6 +22,7 @@ import { HomeComponent } from './components/home/home.component';
 import {GuardsService} from './core/guards.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import { MenuComponent } from './shared/menu/menu.component';
+import {ToastrModule} from 'ngx-toastr';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -46,6 +47,9 @@ const appRoutes: Routes = [
     MatIconModule,
     MatProgressSpinnerModule,
     RouterModule.forRoot(appRoutes),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    }),
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

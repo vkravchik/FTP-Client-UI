@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FtpService} from '../../ftp.service';
 import {BaseComponent} from '../../core/class/BaseComponent';
 import {MatMenuTrigger} from '@angular/material';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-list',
@@ -19,8 +20,9 @@ export class ListComponent extends BaseComponent implements OnInit {
 
   contextMenuPosition = { x: '0px', y: '0px' };
 
-  constructor(private ftp: FtpService) {
-    super();
+  constructor(private ftp: FtpService,
+              protected toast: ToastrService) {
+    super(toast);
   }
 
   ngOnInit() {
@@ -32,8 +34,13 @@ export class ListComponent extends BaseComponent implements OnInit {
     this.showSpinner();
 
     const dir = this.path.join('/');
-    this.ftp.downloadFile(file, dir).subscribe((res) => {
+    this.ftp.downloadFile(file, dir).subscribe(res => {
       console.log(res);
+      this.showSuccess(res.status);
+
+      this.hideSpinner();
+    }, error => {
+      this.showError(error);
 
       this.hideSpinner();
     });
@@ -66,7 +73,7 @@ export class ListComponent extends BaseComponent implements OnInit {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
-    this.contextMenu.menuData = { 'item': item };
+    this.contextMenu.menuData = {item};
     this.contextMenu.menu.focusFirstItem('mouse');
     this.contextMenu.openMenu();
   }
