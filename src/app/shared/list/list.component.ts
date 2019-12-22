@@ -35,12 +35,24 @@ export class ListComponent extends BaseComponent implements OnInit {
 
     const dir = this.path.join('/');
     this.ftp.downloadFile(file, dir).subscribe(res => {
-      console.log(res);
-      this.showSuccess(res.status);
+
+
+      const dataFile = new Blob([res]);
+
+      const a = document.createElement('a');
+
+      document.body.appendChild(a);
+      a.style.display = 'none';
+      a.href = window.URL.createObjectURL(dataFile);
+      a.download = `${file}` + dataFile.type;
+      a.click();
+      a.remove();
+
+      this.showSuccess('Download Success');
 
       this.hideSpinner();
     }, error => {
-      this.showError(error);
+      this.showError('Something went wrong');
 
       this.hideSpinner();
     });

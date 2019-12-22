@@ -22,10 +22,10 @@ export class FtpService {
     return this.http.post(`${this.url}/get_dir`, obj);
   }
 
-  downloadFile(file: string, dir: string): Observable<any> {
+  downloadFile(file: string, dir: string): Observable<Blob> {
     const obj = this.prepareData({file, dir}, true);
 
-    return this.http.post(`${this.url}/download_file`, obj);
+    return this.http.post(`${this.url}/download_file`, obj, {responseType: 'blob'});
   }
 
   prepareData(data: any, isFile?: boolean): any {
