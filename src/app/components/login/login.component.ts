@@ -52,6 +52,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   openConnections() {
-
+    this.router.navigate(['connection']);
   }
 }
