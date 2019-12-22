@@ -3,20 +3,28 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {StoreService} from '../../core/store.service';
 import {FtpService} from '../../ftp.service';
 import {Router} from '@angular/router';
+import {ConnectionService} from '../../connection.service';
+import {flatMap} from 'rxjs/operators';
+import {BaseComponent} from '../../core/class/BaseComponent';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseComponent implements OnInit {
   hide = true;
   connectingForm: FormGroup;
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private storeService: StoreService,
-              private ftp: FtpService) { }
+              private ftp: FtpService,
+              protected toast: ToastrService,
+              private conn: ConnectionService) {
+    super(toast);
+  }
 
   ngOnInit() {
     this.initForm();
@@ -32,10 +40,18 @@ export class LoginComponent implements OnInit {
   }
 
   connect(): void {
-    this.ftp.connect(this.connectingForm.value).subscribe(() => {
+    this.showSpinner();
+    this.conn.addConn(this.connectingForm.value).pipe(
+      flatMap(res => this.ftp.connect(this.connectingForm.value))
+    ).subscribe(res => {
       this.storeService.setConnectObject(this.connectingForm.value);
 
       this.router.navigate(['']);
+      this.hideSpinner();
     });
+  }
+
+  openConnections() {
+
   }
 }

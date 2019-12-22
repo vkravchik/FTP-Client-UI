@@ -1,10 +1,10 @@
-<app-spinner *ngIf="loading"></app-spinner>
-<div style="z-index: 1">
+<div>
   <mat-card>
     <mat-card-title>
-      Login
+      Edit
     </mat-card-title>
     <div class="example-container" [formGroup]="connectingForm">
+      <input matInput hidden formControlName="id">
       <mat-form-field>
         <input matInput placeholder="Enter Host address" formControlName="host">
       </mat-form-field>
@@ -22,9 +22,8 @@
 
       <mat-checkbox formControlName="isSFTP">Use SFTP?</mat-checkbox>
 
-      <button mat-button (click)="openConnections()">My connections</button>
       <mat-card-footer>
-        <button mat-raised-button color="primary" class="login-button" (click)="connect()">Connect</button>
+        <button mat-raised-button color="primary" class="login-button" (click)="save()">Save</button>
       </mat-card-footer>
     </div>
   </mat-card>

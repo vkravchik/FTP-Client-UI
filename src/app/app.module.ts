@@ -5,12 +5,12 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {
   MatButtonModule,
-  MatCardModule, MatCheckboxModule,
+  MatCardModule, MatCheckboxModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatListModule, MatMenuModule,
-  MatProgressSpinnerModule,
+  MatProgressSpinnerModule, MatRippleModule,
   MatTableModule, MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -20,12 +20,15 @@ import {RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import {GuardsService} from './core/guards.service';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MenuComponent } from './shared/menu/menu.component';
 import {ToastrModule} from 'ngx-toastr';
+import { ConnectionTableComponent } from './components/connection-table/connection-table.component';
+import { ConnectionFormComponent } from './shared/connection-form/connection-form.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'connection', component: ConnectionTableComponent},
   {path: '', component: HomeComponent, canActivate: [GuardsService]},
 ];
 
@@ -36,7 +39,9 @@ const appRoutes: Routes = [
     SpinnerComponent,
     LoginComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    ConnectionTableComponent,
+    ConnectionFormComponent
   ],
   imports: [
     BrowserModule,
@@ -56,10 +61,14 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCheckboxModule,
     ReactiveFormsModule,
+    FormsModule,
+    MatRippleModule,
     MatToolbarModule,
     MatMenuModule,
+    MatDialogModule,
   ],
   providers: [GuardsService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ConnectionFormComponent]
 })
 export class AppModule { }
