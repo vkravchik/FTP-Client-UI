@@ -7,7 +7,7 @@ import {StoreService} from './core/store.service';
   providedIn: 'root'
 })
 export class FtpService {
-  url = 'http://localhost:8000/api';
+  url = 'http://localhost:8000/api/ftp';
 
   constructor(private http: HttpClient,
               private storeService: StoreService) { }
