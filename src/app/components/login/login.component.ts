@@ -41,18 +41,13 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   connect(): void {
     this.showSpinner();
-    this.conn.addConn(this.connectingForm.value).pipe(
-      flatMap(res => this.ftp.connect(this.connectingForm.value))
-    ).subscribe(res => {
+    this.conn.addConn(this.connectingForm.value).subscribe(res => {
+    });
+    this.ftp.connect(this.connectingForm.value).subscribe(res => {
       this.storeService.setConnectObject(this.connectingForm.value);
 
       this.router.navigate(['']);
       this.hideSpinner();
-    }, error => {
-      this.ftp.connect(this.connectingForm.value);
-      this.router.navigate(['']);
-      this.hideSpinner();
-
     });
   }
 
